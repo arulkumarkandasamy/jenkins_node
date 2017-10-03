@@ -1,4 +1,4 @@
-node('testing') {
+node('windows_slave') {
     stage('Initialize') {
         echo 'Initializing...'
         def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
@@ -74,5 +74,3 @@ node('staging') {
         '''
     }
 }
-
-
