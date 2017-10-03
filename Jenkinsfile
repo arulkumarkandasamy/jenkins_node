@@ -23,7 +23,7 @@ node('windows_slave') {
           npm install -g npm@3
           npm install
           npm run bootstrap
-          tar -czf install.tar.gz node_modules packages/*/node_modules packages/*/dist || echo
+          tar -czf install.tar.gz node_modules packages/*/node_modules packages/*/dist
         """
     }
 
