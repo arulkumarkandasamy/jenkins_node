@@ -1,5 +1,5 @@
 node('windows_slave') {
-environment
+environment {
     NODE_VERSION = '6'
     NPM_VERSION = '3'
     }
