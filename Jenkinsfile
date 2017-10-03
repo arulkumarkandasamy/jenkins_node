@@ -1,9 +1,9 @@
 node('windows_slave') {
-environment {
+/*environment {
     NODE_VERSION = '6'
     NPM_VERSION = '3'
     }
-    /*stage('Initialize') {
+      stage('Initialize') {
         echo 'Initializing...'
         def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
@@ -18,9 +18,9 @@ environment {
     stage('Install') {
 
     powershell """
-          nvm install $NODE_VERSION
-          nvm use $NODE_VERSION
-          npm install -g npm@$NPM_VERSION
+          nvm install 6
+          nvm use 6
+          npm install -g npm@3
           npm install
           npm run bootstrap
           tar -czf install.tar.gz node_modules packages/*/node_modules packages/*/dist || echo
