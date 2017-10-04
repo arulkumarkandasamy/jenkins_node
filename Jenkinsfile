@@ -17,10 +17,10 @@ node('windows_slave') {
 
     stage('Install') {
 
-    powershell """
+    bat """
           nvm install 6
           nvm use 6
-          $env:Path += ";C:\\Program Files\\nodejs"
+          env:Path += ";C:\\Program Files\\nodejs"
           npm install -g npm@3
           npm install
           npm run bootstrap
@@ -31,12 +31,12 @@ node('windows_slave') {
 
     stage('Build') {
         echo 'Building dependencies...'
-        sh 'npm i'
+        bat 'npm i'
     }
 
     stage('Test') {
         echo 'Testing...'
-        sh 'npm test'
+        bat 'npm test'
     }
 
     stage('Publish') {
@@ -58,7 +58,7 @@ node('staging') {
         def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
 
-        sh "node -v"
+        bat "node -v"
 
         // set environment variables
         env.VARIABLE_1="10"
@@ -72,22 +72,22 @@ node('staging') {
 
     stage('PM2 Install') {
         echo 'Installing PM2 to run application as daemon...'
-        sh "npm install pm2 -g"
+        bat "npm install pm2 -g"
     }
 
     stage('Build') {
         echo 'Building dependencies...'
-        sh 'npm i'
+        bat 'npm i'
     }
 
     stage('Test') {
         echo 'Testing...'
-        sh 'npm test'
+        bat 'npm test'
     }
 
     stage('Run Application') {
         echo 'Stopping old process to run new process...'
-        sh '''
+        bat '''
         npm run pm2-stop
         npm run pm2-start
         '''
