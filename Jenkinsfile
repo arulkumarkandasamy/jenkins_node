@@ -7,6 +7,7 @@ node('windows_slave') {
         echo 'Initializing...'
         def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
+        env:Path += ";C:\\Program Files\\nodejs"
     }*/
 
     stage('Checkout') {
@@ -20,7 +21,7 @@ node('windows_slave') {
     bat """
           nvm install 6
           nvm use 6
-          env:Path += ";C:\\Program Files\\nodejs"
+          net restart Swarm_Daemon
           npm install -g npm@3
           npm install
           npm run bootstrap
