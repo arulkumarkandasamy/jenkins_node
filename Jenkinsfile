@@ -21,6 +21,7 @@ node('windows_slave') {
           nvm install 6
           nvm use 6
           env:Path += ";C:\\Program Files\\nodejs"
+          net restart Swarm_Daemon
           npm install -g npm@3
           npm install
           npm run bootstrap
