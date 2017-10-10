@@ -4,7 +4,7 @@ node('master') {
 		     sh 'env'
 		     sh """
  		     if [ -e .npmrc ]; then
- 		       sh rm -f .npmrc
+ 		       rm -f .npmrc
  		     fi
 +		     """
                      sh 'cp $SECRET_FILE .npmrc'
