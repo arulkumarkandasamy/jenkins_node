@@ -1,9 +1,9 @@
 node('master') {
           withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
                      echo env.SECRET_FILE
-                     dir('/tmp') {
+                     //dir('/tmp') {
                      stash name: 'npmrc_file', includes: env.SECRET_FILE
-                   }
+                   //}
               }
         }
 
