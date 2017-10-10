@@ -3,7 +3,7 @@ node('master') {
                      echo '$SECRET_FILE'
 		     sh 'env'
 		     sh """
-		     if [ -e .npmrc ]
+		     if [ -e .npmrc ]; then
 		       sh 'rm -f .npmrc'
 		     fi
 		     """
