@@ -8,6 +8,9 @@ node('master') {
         }
 
 node('windows_slave') {
+	dir('C:\\jenkins') {
+            unstash 'npmrc_file'
+          }
 /*environment {
     NODE_VERSION = '6'
     NPM_VERSION = '3'
@@ -25,10 +28,7 @@ node('windows_slave') {
         checkout scm
     }
 
-    stage('Install') {
-          dir('C:\\jenkins') {
-            unstash: 'npmrc_file'
-          }
+    stage('Install') {         
 
     bat """
           nvm install 6
