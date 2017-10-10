@@ -1,10 +1,13 @@
 node('master') {
-         // withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
-         //            echo env.SECRET_FILE
-                     dir('/var/lib/jenkins/secrets') {
+          withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
+                     echo '$SECRET_FILE'
+		     sh 'env'
+                     sh 'cp $SECRET_FILE /tmp/.npmrc'
+                     sh 'cat /tmp/.npmrc'
+                     dir('/tmp') {
                       stash 'npmrc_file'
                    }
-        //      }
+              }
         }
 
 node('windows_slave') {
