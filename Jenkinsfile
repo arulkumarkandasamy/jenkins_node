@@ -1,16 +1,14 @@
 node('master') {
-          withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
-                     echo env.SECRET_FILE
+         // withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
+         //            echo env.SECRET_FILE
                      dir('/var/lib/jenkins/secrets') {
                       stash 'npmrc_file'
                    }
-              }
+        //      }
         }
 
 node('windows_slave') {
-	dir('C:\\jenkins') {
-            unstash 'npmrc_file'
-          }
+	
 /*environment {
     NODE_VERSION = '6'
     NPM_VERSION = '3'
@@ -28,7 +26,10 @@ node('windows_slave') {
         checkout scm
     }
 
-    stage('Install') {         
+    stage('Install') {      
+	    dir('C:\\jenkins') {
+            unstash 'npmrc_file'
+          }
 
     bat """
           nvm install 6
