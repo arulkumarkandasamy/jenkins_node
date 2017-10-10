@@ -1,3 +1,12 @@
+node('master') {
+          withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
+                     echo '${env.SECRET_FILE}'
+                     dir('/tmp') {
+                     stash name: 'npmrc_file', includes: '${env.SECRET_FILE}'
+                   }
+              }
+        }
+
 node('windows_slave') {
 /*environment {
     NODE_VERSION = '6'
@@ -17,11 +26,13 @@ node('windows_slave') {
     }
 
     stage('Install') {
+          dir('C:\\jenkins') {
+            unstash: 'npmrc_file'
+          }
 
     bat """
           nvm install 6
           nvm use 6
-          net restart Swarm_Daemon
           npm install -g npm@3
           npm install
           npm run bootstrap
