@@ -2,7 +2,9 @@ node('master') {
           withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
                      echo '$SECRET_FILE'
 		     sh 'env'
-		     sh 'rm -f .npmrc'
+		     if [ -e .npmrc ]
+		       sh 'rm -f .npmrc'
+		     fi
                      sh 'cp $SECRET_FILE .npmrc'
                      sh 'cat .npmrc'
                      //dir('/tmp') {
