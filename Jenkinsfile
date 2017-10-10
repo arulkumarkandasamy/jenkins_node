@@ -1,7 +1,7 @@
 node('master') {
           withCredentials([[$class: 'FileBinding', credentialsId: 'npmrc', variable: 'SECRET_FILE']]) {
                      echo env.SECRET_FILE
-                     dir('/var/lib/jenkins/secrets/master.key') {
+                     dir('/var/lib/jenkins/secrets') {
                       stash 'npmrc_file'
                    }
               }
